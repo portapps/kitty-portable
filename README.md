@@ -2,7 +2,9 @@ putty-launcher.bat
 ==================
 
 A DOS Batch script to launch [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/).
+
 Your PuTTY config is saved to disk (putty.ini) instead of registry.
+
 Tested on Windows XP, Windows Vista and Windows 7.
 
 Requirements

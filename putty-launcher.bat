@@ -1,11 +1,10 @@
 @ECHO OFF
 
 :: Config files
-SET rand=%RANDOM%
-SET ttyInvis=%TEMP%\puttyinvis_%rand%.vbs
-SET ttyRnd=%TEMP%\puttyrnd_%rand%.tmp
-SET ttyDel=%TEMP%\puttydel_%rand%.tmp
-SET ttyReg=%TEMP%\puttyreg_%rand%.tmp
+SET ttyInvis=%TEMP%\puttyinvis_%RANDOM%.vbs
+SET ttyRnd=%TEMP%\puttyrnd_%RANDOM%.tmp
+SET ttyDel=%TEMP%\puttydel_%RANDOM%.tmp
+SET ttyReg=%TEMP%\puttyreg_%RANDOM%.tmp
 
 IF "%1"=="" GOTO LAUNCH
 IF "%1"=="process" GOTO PROCESS
@@ -37,7 +36,6 @@ GOTO DONE
 
 :: Write config to disk (putty.ini)
 :PROCESS
-ECHO %launcher% >>%ttyInvis%
 ECHO REGEDIT4>%ttyRnd%
 ECHO [HKEY_CURRENT_USER\Software\SimonTatham\PuTTY]>>%ttyRnd%
 ECHO "RandSeedFile"="%TEMP:\=\\%\\putty.rnd">>%ttyRnd%

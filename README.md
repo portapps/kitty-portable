@@ -21,6 +21,11 @@ Installation
 * Put the ``putty-launcher.bat`` in the same directory as ``putty.exe``.
 * Run ``putty-launcher.bat``.
 
+Note
+----
+
+If you have already sessions saved in the registry, they will be copied automatically to the portable version.
+
 More infos
 ----------
 

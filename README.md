@@ -1,7 +1,7 @@
-putty-launcher.bat
-==================
+PuTTY Portable
+==============
 
-A DOS Batch script to launch [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/).
+A DOS Batch script to make [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/) portable.
 
 Your PuTTY config is saved to disk (putty.ini) instead of registry.
 
@@ -18,8 +18,8 @@ Installation
 ------------
 
 * Download the [latest version of PuTTY](http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe).
-* Put the ``putty-launcher.bat`` in the same directory as ``putty.exe``.
-* Run ``putty-launcher.bat``.
+* Put the ``putty-portable.bat`` in the same directory as ``putty.exe``.
+* Run ``putty-portable.bat``.
 
 Note
 ----
@@ -29,4 +29,4 @@ If you have already sessions saved in the registry, they will be copied automati
 More infos
 ----------
 
-http://www.crazyws.fr/dev/applis-et-scripts/putty-launcher-garder-la-configuration-sur-disque-dans-un-fichier-UBVQA.html
+http://www.crazyws.fr/dev/applis-et-scripts/putty-portable-garder-la-configuration-sur-disque-dans-un-fichier-UBVQA.html

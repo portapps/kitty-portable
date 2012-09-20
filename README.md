@@ -29,4 +29,4 @@ If you have already sessions saved in the registry, they will be copied automati
 More infos
 ----------
 
-http://www.crazyws.fr/dev/applis-et-scripts/putty-portable-garder-la-configuration-sur-disque-dans-un-fichier-UBVQA.html
+http://www.crazyws.fr/dev/applis-et-scripts/putty-portable-UBVQA.html

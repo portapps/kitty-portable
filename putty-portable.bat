@@ -1,5 +1,30 @@
 @ECHO OFF
 
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                                                ::
+::  Putty Portable                                                                ::
+::                                                                                ::
+::  A DOS Batch script to make Putty portable on Windows systems.                 ::
+::                                                                                ::
+::  Copyright (C) 2013-2014 Cr@zy <webmaster@crazyws.fr>                          ::
+::                                                                                ::
+::  Putty Portable is free software; you can redistribute it and/or modify        ::
+::  it under the terms of the GNU Lesser General Public License as published by   ::
+::  the Free Software Foundation, either version 3 of the License, or             ::
+::  (at your option) any later version.                                           ::
+::                                                                                ::
+::  Putty Portable is distributed in the hope that it will be useful,             ::
+::  but WITHOUT ANY WARRANTY; without even the implied warranty of                ::
+::  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the                  ::
+::  GNU Lesser General Public License for more details.                           ::
+::                                                                                ::
+::  You should have received a copy of the GNU Lesser General Public License      ::
+::  along with this program. If not, see http://www.gnu.org/licenses/.            ::
+::                                                                                ::
+::  Usage: putty-portable.bat                                                     ::
+::                                                                                ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :: Config files
 SET ttyInvis=%TEMP%\puttyinvis_%RANDOM%.vbs
 SET ttyRnd=%TEMP%\puttyrnd_%RANDOM%.tmp

@@ -1,31 +1,28 @@
-# PuTTY Portable
+<p align="center"><a href="https://portapps.github.io/app/kitty-portable" target="_blank"><img width="100" src="https://github.com/portapps/kitty-portable/blob/master/res/papp.png"></a></p>
 
-A DOS Batch script to make [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/) portable.
+<p align="center">
+  <a href="https://portapps.github.io/app/kitty-portable/#download"><img src="https://img.shields.io/github/release/portapps/kitty-portable.svg?style=flat-square" alt="GitHub release"></a>
+  <a href="https://portapps.github.io/app/kitty-portable/#download"><img src="https://img.shields.io/github/downloads/portapps/kitty-portable/total.svg?style=flat-square" alt="Total downloads"></a>
+  <a href="https://ci.appveyor.com/project/portapps/kitty-portable"><img src="https://img.shields.io/appveyor/ci/portapps/kitty-portable.svg?style=flat-square" alt="AppVeyor"></a>
+  <a href="https://goreportcard.com/report/github.com/portapps/kitty-portable"><img src="https://goreportcard.com/badge/github.com/portapps/kitty-portable?style=flat-square" alt="Go Report"></a>
+  <a href="https://www.codacy.com/app/portapps/kitty-portable"><img src="https://img.shields.io/codacy/grade/69187668bf5f4ca5b6c0c3c9aeba05f7.svg?style=flat-square" alt="Code Quality"></a>
+  <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WQD7AQGPDEPSG"><img src="https://img.shields.io/badge/donate-paypal-7057ff.svg?style=flat-square" alt="Donate Paypal"></a>
+</p>
 
-Your PuTTY config is saved to disk (putty.ini) instead of registry.
+## About
 
-Tested on Windows XP, Windows Vista and Windows 7.
+[KiTTY](http://www.9bis.net/kitty/) portable app made with 🚀 [Portapps](https://portapps.github.io).<br />
+Documentation and downloads can be found on https://portapps.github.io/app/kitty-portable
 
-## Requirements
+## How can I help ?
 
-* Latest version of [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/).
-* [WSH (Windows Script Host)](http://support.microsoft.com/kb/232211) : Open a command prompt and type ``wscript`` to check.
-* Access to the [Windows registry](http://support.microsoft.com/kb/256986) : Open a command prompt and type ``regedit`` to check.
+All kinds of contributions are welcome :raised_hands:!<br />
+The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon:<br />
+But we're not gonna lie to each other, I'd rather you buy me a beer or two :beers:!
 
-## Installation
-
-* Download the [latest version of PuTTY](http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe).
-* Put the ``putty-portable.bat`` in the same directory as ``putty.exe``.
-* Run ``putty-portable.bat``.
-
-## Note
-
-If you have already sessions saved in the registry, they will be copied automatically to the portable version.
+[![Paypal Donate](https://portapps.github.io/img/paypal-donate.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WQD7AQGPDEPSG)
 
 ## License
 
-LGPL. See ``LICENSE`` for more details.
-
-## More infos
-
-http://www.crazyws.fr/dev/applis-et-scripts/putty-portable-UBVQA.html
+MIT. See `LICENSE` for more details.<br />
+Rocket icon credit to [Squid Ink](http://thesquid.ink).

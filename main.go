@@ -25,7 +25,7 @@ func main() {
 	Papp.Args = nil
 	Papp.WorkingDir = Papp.AppPath
 
-	CreateFolder(PathJoin(Papp.DataPath, "config"))
+	configPath := CreateFolder(PathJoin(Papp.DataPath, "config"))
 	iniFile := PathJoin(Papp.DataPath, "kitty.ini")
 
 	if !Exists(iniFile) {
@@ -47,15 +47,23 @@ func main() {
 	if err := ReplaceByPrefix(iniFile, "#savemode=", "savemode=dir"); err != nil {
 		Log.Error("Cannot set savemode:", err)
 	}
-	if err := ReplaceByPrefix(iniFile, "configdir=", `configdir=..\data\config`); err != nil {
+	if err := ReplaceByPrefix(iniFile, "configdir=", "configdir="+FormatWindowsPath(configPath)); err != nil {
 		Log.Error("Cannot set configdir:", err)
 	}
-	if err := ReplaceByPrefix(iniFile, "#configdir=", `configdir=..\data\config`); err != nil {
+	if err := ReplaceByPrefix(iniFile, "#configdir=", "configdir="+FormatWindowsPath(configPath)); err != nil {
 		Log.Error("Cannot set configdir:", err)
 	}
 
 	Log.Info("Setting environment...")
 	os.Setenv("KITTY_INI_FILE", FormatWindowsPath(iniFile))
+
+	configPathEmpty, _ := IsDirEmpty(configPath)
+	if configPathEmpty {
+		Log.Info("Converting registry settings to dir mode...")
+		if err := QuickExecCmd(Papp.Process, []string{"-convert-dir"}); err != nil {
+			Log.Errorf("Cannot convert registry settings to dir mode: %v", err)
+		}
+	}
 
 	Launch(os.Args[1:])
 }

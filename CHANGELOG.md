@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.70.0.8-3 (2019/01/10)
+
+* Upgrade to KiTTY 0.70.0.8
+
 ## 0.70.0.7-2 (2018/11/28)
 
 * Upgrade to KiTTY 0.70.0.7

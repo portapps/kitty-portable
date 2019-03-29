@@ -10,60 +10,66 @@ import (
 
 	"github.com/portapps/kitty-portable/assets"
 	. "github.com/portapps/portapps"
+	"github.com/portapps/portapps/pkg/proc"
+	"github.com/portapps/portapps/pkg/utl"
+)
+
+var (
+	app *App
 )
 
 func init() {
-	Papp.ID = "kitty-portable"
-	Papp.Name = "KiTTY"
-	Init()
+	var err error
+
+	// Init app
+	if app, err = New("kitty-portable", "KiTTY"); err != nil {
+		Log.Fatal().Err(err).Msg("Cannot initialize application. See log file for more info.")
+	}
 }
 
 func main() {
-	Papp.AppPath = AppPathJoin("app")
-	Papp.DataPath = CreateFolder(AppPathJoin("data"))
-	Papp.Process = PathJoin(Papp.AppPath, "kitty.exe")
-	Papp.Args = nil
-	Papp.WorkingDir = Papp.AppPath
+	utl.CreateFolder(app.DataPath)
+	app.Process = utl.PathJoin(app.AppPath, "kitty.exe")
 
-	configPath := CreateFolder(PathJoin(Papp.DataPath, "config"))
-	iniFile := PathJoin(Papp.DataPath, "kitty.ini")
+	configPath := utl.CreateFolder(app.DataPath, "config")
+	iniFile := utl.PathJoin(app.DataPath, "kitty.ini")
 
-	if !Exists(iniFile) {
-		Log.Info("Creating default ini file...")
+	if !utl.Exists(iniFile) {
+		Log.Info().Msg("Creating default ini file...")
 		kittyIni, err := assets.Asset("res/kitty.ini")
 		if err != nil {
-			Log.Error("Cannot load asset kitty.ini:", err)
+			Log.Fatal().Err(err).Msg("Cannot load asset kitty.ini")
 		}
 		err = ioutil.WriteFile(iniFile, kittyIni, 0644)
 		if err != nil {
-			Log.Error("Cannot write kitty.ini:", err)
+			Log.Fatal().Err(err).Msg("Cannot write kitty.ini")
 		}
 	}
 
-	Log.Info("Updating configuration...")
-	if err := ReplaceByPrefix(iniFile, "savemode=", "savemode=dir"); err != nil {
-		Log.Error("Cannot set savemode:", err)
+	Log.Info().Msg("Updating configuration...")
+	if err := utl.ReplaceByPrefix(iniFile, "savemode=", "savemode=dir"); err != nil {
+		Log.Fatal().Err(err).Msg("Cannot set savemode")
 	}
-	if err := ReplaceByPrefix(iniFile, "#savemode=", "savemode=dir"); err != nil {
-		Log.Error("Cannot set savemode:", err)
+	if err := utl.ReplaceByPrefix(iniFile, "#savemode=", "savemode=dir"); err != nil {
+		Log.Fatal().Err(err).Msg("Cannot set savemode")
 	}
-	if err := ReplaceByPrefix(iniFile, "configdir=", "configdir="+FormatWindowsPath(configPath)); err != nil {
-		Log.Error("Cannot set configdir:", err)
+	if err := utl.ReplaceByPrefix(iniFile, "configdir=", "configdir="+utl.FormatWindowsPath(configPath)); err != nil {
+		Log.Fatal().Err(err).Msg("Cannot set configdir")
 	}
-	if err := ReplaceByPrefix(iniFile, "#configdir=", "configdir="+FormatWindowsPath(configPath)); err != nil {
-		Log.Error("Cannot set configdir:", err)
+	if err := utl.ReplaceByPrefix(iniFile, "#configdir=", "configdir="+utl.FormatWindowsPath(configPath)); err != nil {
+		Log.Fatal().Err(err).Msg("Cannot set configdir")
 	}
 
-	Log.Info("Setting environment...")
-	os.Setenv("KITTY_INI_FILE", FormatWindowsPath(iniFile))
+	Log.Info().Msg("Setting environment...")
+	utl.OverrideEnv("KITTY_INI_FILE", utl.FormatWindowsPath(iniFile))
 
-	configPathEmpty, _ := IsDirEmpty(configPath)
+	configPathEmpty, _ := utl.IsDirEmpty(configPath)
 	if configPathEmpty {
-		Log.Info("Converting registry settings to dir mode...")
-		if err := QuickExecCmd(Papp.Process, []string{"-convert-dir"}); err != nil {
-			Log.Errorf("Cannot convert registry settings to dir mode: %v", err)
+		Log.Info().Msg("Converting registry settings to dir mode...")
+		if err := proc.QuickCmd(app.Process, []string{"-convert-dir"}); err != nil {
+			Log.Error().Err(err).Msg("Cannot convert registry settings to dir mode")
 		}
 	}
 
-	Launch(os.Args[1:])
+	app.Launch(os.Args[1:])
 }

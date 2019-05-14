@@ -20,7 +20,7 @@ import (
 func bindataRead(data []byte, name string) ([]byte, error) {
 	gz, err := gzip.NewReader(bytes.NewBuffer(data))
 	if err != nil {
-		return nil, fmt.Errorf("Read %q: %v", name, err)
+		return nil, fmt.Errorf("read %q: %v", name, err)
 	}
 
 	var buf bytes.Buffer
@@ -28,7 +28,7 @@ func bindataRead(data []byte, name string) ([]byte, error) {
 	clErr := gz.Close()
 
 	if err != nil {
-		return nil, fmt.Errorf("Read %q: %v", name, err)
+		return nil, fmt.Errorf("read %q: %v", name, err)
 	}
 	if clErr != nil {
 		return nil, err
@@ -84,7 +84,7 @@ func resKittyIni() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "res/kitty.ini", size: 990, mode: os.FileMode(438), modTime: time.Unix(1539732256, 0)}
+	info := bindataFileInfo{name: "res/kitty.ini", size: 990, mode: os.FileMode(0666), modTime: time.Unix(1539732256, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0xf5, 0x48, 0xda, 0xe5, 0xde, 0xab, 0xd6, 0x9c, 0xc0, 0x72, 0x21, 0x47, 0xf3, 0x14, 0x89, 0x31, 0xd5, 0x5, 0xe6, 0x57, 0x54, 0x83, 0x37, 0x34, 0x8c, 0xc0, 0x19, 0x98, 0x25, 0xe1, 0xd1, 0x5}}
 	return a, nil
 }

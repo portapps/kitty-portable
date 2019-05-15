@@ -12,13 +12,15 @@
 
 ## Notice of Non-Affiliation and Disclaimer
 
-Portapps is not affiliated, associated, authorized, endorsed by, or in any way officially connected with KiTTY, or any of its subsidiaries or its affiliates. The official KiTTY website can be found at http://www.9bis.net/kitty/.
+Portapps is not affiliated, associated, authorized, endorsed by, or in any way officially connected with KiTTY™, or any of its subsidiaries or its affiliates.
 
-The name KiTTY® as well as related names, marks, emblems and images are registered trademarks of their respective owners.
+The official KiTTY™ website can be found at http://www.9bis.net/kitty/.
+
+The name KiTTY™ as well as related names, marks, emblems and images are registered trademarks of their respective owners.
 
 ## About
 
-KiTTY portable app made with 🚀 [Portapps](https://portapps.io).<br />
+KiTTY™ portable app made with 🚀 [Portapps](https://portapps.io).<br />
 Documentation and downloads can be found on https://portapps.io/app/kitty-portable/
 
 ## How can I help ?

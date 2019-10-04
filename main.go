@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"os"
 
-	_ "github.com/kevinburke/go-bindata"
 	"github.com/portapps/kitty-portable/assets"
 	. "github.com/portapps/portapps"
 	"github.com/portapps/portapps/pkg/proc"

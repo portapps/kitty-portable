@@ -1,7 +1,7 @@
 //go:generate go install -v github.com/kevinburke/go-bindata/go-bindata
 //go:generate go-bindata -pkg assets -o assets/assets.go res/kitty.ini
 //go:generate go install -v github.com/josephspurrier/goversioninfo/cmd/goversioninfo
-//go:generate goversioninfo -icon=res/papp.ico
+//go:generate goversioninfo -icon=res/papp.ico -manifest=res/papp.manifest
 package main
 
 import (

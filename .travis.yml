@@ -1,47 +1,12 @@
+version: ~> 1.0
+
 os: windows
 language: shell
 
-env:
-  global:
-    - GOVERSION: 1.12.10
-    - NODEJS_VERSION: 11.14.0
-
-before_install:
-  - git clone https://github.com/portapps/portapps ${TRAVIS_BUILD_DIR}/../portapps
-  - source ${TRAVIS_BUILD_DIR}/../portapps/.travis/prepare.sh
-  - bash ${TRAVIS_BUILD_DIR}/../portapps/.travis/java.sh
-  - bash ${TRAVIS_BUILD_DIR}/../portapps/.travis/ant.sh
-  - bash ${TRAVIS_BUILD_DIR}/../portapps/.travis/nodejs.sh
-  - bash ${TRAVIS_BUILD_DIR}/../portapps/.travis/go.sh
-
-script:
-  - ant release
-
-after_success:
-  - export APP_VERSION=$(cat $TRAVIS_BUILD_DIR/bin/tmp/version.dat)
-  - echo ${APP_VERSION}
-
-before_deploy:
-  - git config --local user.email "builds@travis-ci.com"
-  - git config --local user.name "Travis CI"
-  - export TRAVIS_TAG="${APP_VERSION}"
-  - git tag $TRAVIS_TAG
-  - ls -al bin/release
-
-deploy:
-  provider: releases
-  api_key:
-    secure: qxmGV8kBlPUddJlm5/0iBA6I9BIOjjFCWWGiwZ0tmDb+/jzoMK3wkOcVFAYoYCLmjF+2aSl3A6eQeFx+kovcfoM68UZBiUcZzsU4pC0rTgw9sfoeC1q0wA18vT18BWeSU6LzHWyedCnaTOWN1VmKxM1QmXHqjR4ktJuhHFZ21ZCgnx8dGIi4Q64MPbvavo3WkkUlXaQlkgHNMKad2Wyh9g9TQn3IMXyjtzNZtK4f3JAZNdg9raEB77zRImytXy7UZJ3CNC5ek+ltqS6CheCNMO6Sr7bvyK9pzdrp2ysK41ZcQ80RmTJiCgukByuoohTH8RSkmOf/c8MuzsvTMba95QEF/kWNsBnkmZisRGqg62XHqTKjxY0c1+l688Qs/xC6rE/lPdaN/Ra2NvRG7x79ULQHLuy1SWIy6Bq6MQBLsoLer8zN+ymKidP2tUkPQbgOrA4QlzS1+r4mHcsrpGMC5LknyILMr5HR4bWCbXzevYo3wsCuG19FmI+O/sJXCQnFx4j4tQe1ZF9islqHKFFXQVGC89gjYDPN3pBmNVNRCc8mhp56pbYPPmd12uMu47fMsoa8+I64wml4fq9SmS7v5dZ3QaOEIQICsCvMv6PDSIPzTZpkt/zs4Dv654ZhLPwlz+t1HTy1tK5KanxXmSqSFWdyM0ByBEQfAXePgm7EadY=
-  file_glob: true
-  file: bin/release/*
-  skip_cleanup: true
-  draft: true
-  on:
-    tags: false
-
-notifications:
-  email:
-    recipients:
-      - travisci@portapps.io
-    on_success: always
-    on_failure: always
+import:
+  - source: portapps/portapps:.travis/configs/install.yml
+  - source: portapps/portapps:.travis/configs/build.yml
+  - source: portapps/portapps:.travis/configs/set-version.yml
+  - source: portapps/portapps:.travis/configs/git-config.yml
+  - source: portapps/portapps:.travis/configs/deploy.yml
+  - source: portapps/portapps:.travis/configs/notifs.yml

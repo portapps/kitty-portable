@@ -13,9 +13,9 @@ before_install:
   - git clone --branch ${PORTAPPS_VERSION} https://github.com/portapps/portapps ${PORTAPPS_DIR}
 
 import:
-  - source: ${PORTAPPS_DIR}/.travis/configs/install.yml
-  - source: ${PORTAPPS_DIR}/.travis/configs/build.yml
-  - source: ${PORTAPPS_DIR}/.travis/configs/set-version.yml
-  - source: ${PORTAPPS_DIR}/.travis/configs/git-config.yml
-  - source: ${PORTAPPS_DIR}/.travis/configs/deploy.yml
-  - source: ${PORTAPPS_DIR}/.travis/configs/notifs.yml
+  - ${PORTAPPS_DIR}/.travis/configs/install.yml
+  - ${PORTAPPS_DIR}/.travis/configs/build.yml
+  - ${PORTAPPS_DIR}/.travis/configs/set-version.yml
+  - ${PORTAPPS_DIR}/.travis/configs/git-config.yml
+  - ${PORTAPPS_DIR}/.travis/configs/deploy.yml
+  - ${PORTAPPS_DIR}/.travis/configs/notifs.yml

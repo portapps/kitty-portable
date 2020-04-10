@@ -1,6 +1,6 @@
 module github.com/portapps/kitty-portable
 
-go 1.12
+go 1.13
 
 require (
 	github.com/kevinburke/go-bindata v3.19.0+incompatible

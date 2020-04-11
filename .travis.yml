@@ -3,20 +3,13 @@ version: ~> 1.0
 os: windows
 language: shell
 
-env:
-  global:
-    - PORTAPPS_DIR=/c/portapps
-
 before_install:
-  - |
-    export PORTAPPS_VERSION=$(cat go.mod | grep github.com/portapps/portapps | awk '{print $2}')
-    echo "PORTAPPS_VERSION=${PORTAPPS_VERSION}"
-  - git clone --branch ${PORTAPPS_VERSION} https://github.com/portapps/portapps ${PORTAPPS_DIR}
+  - export PORTAPPS_VERSION=$(cat go.mod | grep github.com/portapps/portapps | awk '{print $2}')
 
 import:
-  - ${PORTAPPS_DIR}/.travis/configs/install.yml
-  - ${PORTAPPS_DIR}/.travis/configs/build.yml
-  - ${PORTAPPS_DIR}/.travis/configs/set-version.yml
-  - ${PORTAPPS_DIR}/.travis/configs/git-config.yml
-  - ${PORTAPPS_DIR}/.travis/configs/deploy.yml
-  - ${PORTAPPS_DIR}/.travis/configs/notifs.yml
+  - portapps/portapps:.travis/configs/install.yml@$PORTAPPS_VERSION
+  - portapps/portapps:.travis/configs/build.yml@$PORTAPPS_VERSION
+  - portapps/portapps:.travis/configs/set-version.yml@$PORTAPPS_VERSION
+  - portapps/portapps:.travis/configs/git-config.yml@$PORTAPPS_VERSION
+  - portapps/portapps:.travis/configs/deploy.yml@$PORTAPPS_VERSION
+  - portapps/portapps:.travis/configs/notifs.yml@$PORTAPPS_VERSION

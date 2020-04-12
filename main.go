@@ -9,10 +9,10 @@ import (
 	"os"
 
 	"github.com/portapps/kitty-portable/assets"
-	"github.com/portapps/portapps/v2"
+	"github.com/portapps/portapps/v2/pkg/log"
+	"github.com/portapps/portapps/v2/pkg/portapps"
 	"github.com/portapps/portapps/v2/pkg/proc"
 	"github.com/portapps/portapps/v2/pkg/utl"
-	"github.com/rs/zerolog/log"
 )
 
 var (

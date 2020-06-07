@@ -9,24 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Prep
-        id: prep
-        run: |
-          TAG_NAME=${{ github.event.release.tag_name }}
-          echo ::set-output name=monitor_path::/${{ github.event.repository.name }}/${TAG_NAME#v}
-      -
         name: VirusTotal Monitor Scan
         uses: crazy-max/ghaction-virustotal@master
         with:
           vt_api_key: ${{ secrets.VT_MONITOR_API_KEY }}
           vt_monitor: true
-          monitor_path: ${{ steps.prep.outputs.monitor_path }}
+          monitor_path: /${{ github.event.repository.name }}/${{ github.event.release.tag_name }}
           update_release_body: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            *-portable.exe
-            *-portable-win32.exe
-            *-portable-win64.exe
+            ${{ github.event.repository.name }}-win32.exe
       -
         name: VirusTotal Scan
         uses: crazy-max/ghaction-virustotal@v2
@@ -35,6 +27,4 @@ jobs:
           update_release_body: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            *-portable.exe
-            *-portable-win32.exe
-            *-portable-win64.exe
+            ${{ github.event.repository.name }}-win32.exe

@@ -9,10 +9,10 @@ import (
 	"os"
 
 	"github.com/portapps/kitty-portable/assets"
-	"github.com/portapps/portapps/v2"
-	"github.com/portapps/portapps/v2/pkg/log"
-	"github.com/portapps/portapps/v2/pkg/proc"
-	"github.com/portapps/portapps/v2/pkg/utl"
+	"github.com/portapps/portapps/v3"
+	"github.com/portapps/portapps/v3/pkg/log"
+	"github.com/portapps/portapps/v3/pkg/proc"
+	"github.com/portapps/portapps/v3/pkg/utl"
 )
 
 var (
@@ -62,7 +62,7 @@ func main() {
 	}
 
 	log.Info().Msg("Setting environment...")
-	utl.OverrideEnv("KITTY_INI_FILE", utl.FormatWindowsPath(iniFile))
+	os.Setenv("KITTY_INI_FILE", utl.FormatWindowsPath(iniFile))
 
 	configPathEmpty, _ := utl.IsDirEmpty(configPath)
 	if configPathEmpty {

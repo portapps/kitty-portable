@@ -13,7 +13,7 @@
 
 Portapps is not affiliated, associated, authorized, endorsed by, or in any way officially connected with KiTTY™, or any of its subsidiaries or its affiliates.
 
-The official KiTTY™ website can be found at http://www.9bis.net/kitty/.
+The official KiTTY™ website can be found at https://www.9bis.net/kitty.
 
 The name KiTTY™ as well as related names, marks, emblems and images are registered trademarks of their respective owners.
 

@@ -5,7 +5,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"os"
 
 	"github.com/portapps/kitty-portable/assets"
@@ -41,7 +40,7 @@ func main() {
 		if err != nil {
 			log.Fatal().Err(err).Msg("Cannot load asset kitty.ini")
 		}
-		err = ioutil.WriteFile(iniFile, kittyIni, 0644)
+		err = os.WriteFile(iniFile, kittyIni, 0644)
 		if err != nil {
 			log.Fatal().Err(err).Msg("Cannot write kitty.ini")
 		}

@@ -50,13 +50,13 @@ func main() {
 	if err := utl.ReplaceByPrefix(iniFile, "savemode=", "savemode=dir"); err != nil {
 		log.Fatal().Err(err).Msg("Cannot set savemode")
 	}
-	if err := utl.ReplaceByPrefix(iniFile, "#savemode=", "savemode=dir"); err != nil {
+	if err := utl.ReplaceByPrefix(iniFile, ";savemode=", "savemode=dir"); err != nil {
 		log.Fatal().Err(err).Msg("Cannot set savemode")
 	}
 	if err := utl.ReplaceByPrefix(iniFile, "configdir=", "configdir="+utl.FormatWindowsPath(configPath)); err != nil {
 		log.Fatal().Err(err).Msg("Cannot set configdir")
 	}
-	if err := utl.ReplaceByPrefix(iniFile, "#configdir=", "configdir="+utl.FormatWindowsPath(configPath)); err != nil {
+	if err := utl.ReplaceByPrefix(iniFile, ";configdir=", "configdir="+utl.FormatWindowsPath(configPath)); err != nil {
 		log.Fatal().Err(err).Msg("Cannot set configdir")
 	}
 

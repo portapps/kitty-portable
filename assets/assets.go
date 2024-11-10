@@ -10,7 +10,6 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -84,7 +83,7 @@ func resKittyIni() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "res/kitty.ini", size: 8732, mode: os.FileMode(0666), modTime: time.Unix(1703601529, 0)}
+	info := bindataFileInfo{name: "res/kitty.ini", size: 8732, mode: os.FileMode(0666), modTime: time.Unix(1703602473, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x6f, 0xcb, 0xcf, 0xfd, 0xef, 0x70, 0x98, 0x71, 0x50, 0xc0, 0xee, 0xa0, 0xff, 0x1d, 0x8b, 0xf4, 0xc, 0xcf, 0xe1, 0xbf, 0x94, 0x9f, 0xa9, 0x33, 0x99, 0xf2, 0x3d, 0xc8, 0x75, 0xb, 0xd9, 0x87}}
 	return a, nil
 }
@@ -190,11 +189,13 @@ const AssetDebug = false
 // directory embedded in the file by go-bindata.
 // For example if you run go-bindata on data/... and data contains the
 // following hierarchy:
-//     data/
-//       foo.txt
-//       img/
-//         a.png
-//         b.png
+//
+//	data/
+//	  foo.txt
+//	  img/
+//	    a.png
+//	    b.png
+//
 // then AssetDir("data") would return []string{"foo.txt", "img"},
 // AssetDir("data/img") would return []string{"a.png", "b.png"},
 // AssetDir("foo.txt") and AssetDir("notexist") would return an error, and
@@ -246,7 +247,7 @@ func RestoreAsset(dir, name string) error {
 	if err != nil {
 		return err
 	}
-	err = ioutil.WriteFile(_filePath(dir, name), data, info.Mode())
+	err = os.WriteFile(_filePath(dir, name), data, info.Mode())
 	if err != nil {
 		return err
 	}

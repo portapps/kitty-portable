@@ -1,11 +1,11 @@
 //go:generate go install -v github.com/kevinburke/go-bindata/v4/go-bindata
 //go:generate go-bindata -pkg assets -o assets/assets.go res/kitty.ini
 //go:generate go install -v github.com/josephspurrier/goversioninfo/cmd/goversioninfo
-//go:generate goversioninfo -icon=res/papp.ico -manifest=res/papp.manifest
 package main
 
 import (
 	"os"
+	"path/filepath"
 
 	"github.com/portapps/kitty-portable/assets"
 	"github.com/portapps/portapps/v3"
@@ -29,10 +29,10 @@ func init() {
 
 func main() {
 	utl.CreateFolder(app.DataPath)
-	app.Process = utl.PathJoin(app.AppPath, "kitty.exe")
+	app.Process = filepath.Join(app.AppPath, "kitty.exe")
 
 	configPath := utl.CreateFolder(app.DataPath, "config")
-	iniFile := utl.PathJoin(app.DataPath, "kitty.ini")
+	iniFile := filepath.Join(app.DataPath, "kitty.ini")
 
 	if !utl.Exists(iniFile) {
 		log.Info().Msg("Creating default ini file...")

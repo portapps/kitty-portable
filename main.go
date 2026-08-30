@@ -9,9 +9,9 @@ import (
 
 	"github.com/portapps/kitty-portable/assets"
 	"github.com/portapps/portapps/v3"
+	"github.com/portapps/portapps/v3/pkg/files"
 	"github.com/portapps/portapps/v3/pkg/log"
 	"github.com/portapps/portapps/v3/pkg/proc"
-	"github.com/portapps/portapps/v3/pkg/utl"
 )
 
 var (
@@ -28,13 +28,18 @@ func init() {
 }
 
 func main() {
-	utl.CreateFolder(app.DataPath)
+	if err := os.MkdirAll(app.DataPath, 0o755); err != nil {
+		log.Fatal().Err(err).Msg("Cannot create data path")
+	}
 	app.Process = filepath.Join(app.AppPath, "kitty.exe")
 
-	configPath := utl.CreateFolder(app.DataPath, "config")
+	configPath := filepath.Join(app.DataPath, "config")
+	if err := os.MkdirAll(configPath, 0o755); err != nil {
+		log.Fatal().Err(err).Msg("Cannot create config path")
+	}
 	iniFile := filepath.Join(app.DataPath, "kitty.ini")
 
-	if !utl.Exists(iniFile) {
+	if !files.Exists(iniFile) {
 		log.Info().Msg("Creating default ini file...")
 		kittyIni, err := assets.Asset("res/kitty.ini")
 		if err != nil {
@@ -47,23 +52,23 @@ func main() {
 	}
 
 	log.Info().Msg("Updating configuration...")
-	if err := utl.ReplaceByPrefix(iniFile, "savemode=", "savemode=dir"); err != nil {
+	if err := files.ReplaceByPrefix(iniFile, "savemode=", "savemode=dir"); err != nil {
 		log.Fatal().Err(err).Msg("Cannot set savemode")
 	}
-	if err := utl.ReplaceByPrefix(iniFile, ";savemode=", "savemode=dir"); err != nil {
+	if err := files.ReplaceByPrefix(iniFile, ";savemode=", "savemode=dir"); err != nil {
 		log.Fatal().Err(err).Msg("Cannot set savemode")
 	}
-	if err := utl.ReplaceByPrefix(iniFile, "configdir=", "configdir="+utl.FormatWindowsPath(configPath)); err != nil {
+	if err := files.ReplaceByPrefix(iniFile, "configdir=", "configdir="+filepath.FromSlash(configPath)); err != nil {
 		log.Fatal().Err(err).Msg("Cannot set configdir")
 	}
-	if err := utl.ReplaceByPrefix(iniFile, ";configdir=", "configdir="+utl.FormatWindowsPath(configPath)); err != nil {
+	if err := files.ReplaceByPrefix(iniFile, ";configdir=", "configdir="+filepath.FromSlash(configPath)); err != nil {
 		log.Fatal().Err(err).Msg("Cannot set configdir")
 	}
 
 	log.Info().Msg("Setting environment...")
-	os.Setenv("KITTY_INI_FILE", utl.FormatWindowsPath(iniFile))
+	os.Setenv("KITTY_INI_FILE", filepath.FromSlash(iniFile))
 
-	configPathEmpty, _ := utl.IsDirEmpty(configPath)
+	configPathEmpty, _ := files.IsDirEmpty(configPath)
 	if configPathEmpty {
 		log.Info().Msg("Converting registry settings to dir mode...")
 		if err := proc.QuickCmd(app.Process, []string{"-convert-dir"}); err != nil {

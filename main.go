@@ -1,18 +1,19 @@
-//go:generate go install -v github.com/kevinburke/go-bindata/v4/go-bindata
-//go:generate go-bindata -pkg assets -o assets/assets.go res/kitty.ini
 //go:generate go install -v github.com/josephspurrier/goversioninfo/cmd/goversioninfo
 package main
 
 import (
+	_ "embed"
 	"os"
 	"path/filepath"
 
-	"github.com/portapps/kitty-portable/assets"
 	"github.com/portapps/portapps/v3"
 	"github.com/portapps/portapps/v3/pkg/files"
 	"github.com/portapps/portapps/v3/pkg/log"
 	"github.com/portapps/portapps/v3/pkg/proc"
 )
+
+//go:embed res/kitty.ini
+var defaultKittyIni []byte
 
 var (
 	app *portapps.App
@@ -41,11 +42,7 @@ func main() {
 
 	if !files.Exists(iniFile) {
 		log.Info().Msg("Creating default ini file...")
-		kittyIni, err := assets.Asset("res/kitty.ini")
-		if err != nil {
-			log.Fatal().Err(err).Msg("Cannot load asset kitty.ini")
-		}
-		err = os.WriteFile(iniFile, kittyIni, 0644)
+		err := os.WriteFile(iniFile, defaultKittyIni, 0644)
 		if err != nil {
 			log.Fatal().Err(err).Msg("Cannot write kitty.ini")
 		}
